@@ -17,7 +17,7 @@ void	*thread_function(void *ph)
 
 
 void manage_threads()
-{
+{/* 
 	thread 1
 	timestamp_in_ms X has taken a fork 
 	usleep(time to eat);
@@ -29,5 +29,5 @@ void manage_threads()
 	timestamp_in_ms X is thinking
 	tempo de morrer - tempo dormir 
 	timestamp_in_ms X died
-	
+	 */
 }

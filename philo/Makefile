@@ -6,7 +6,7 @@
 #    By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 10:42:35 by hfilipe-          #+#    #+#              #
-#    Updated: 2025/03/17 15:28:04 by hfilipe-         ###   ########.fr        #
+#    Updated: 2025/03/18 16:04:32 by hfilipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = gcc
 GDB = -ggdb
 FLAGS = -Wall -Werror -Wextra 
 SRC_DIR = src
-OBJ_DIR = OBJ
+OBJ_DIR = obj
 INC_DIR = includes
 SRC_FILES = philosophers.c philosophers_utils.c init.c check_args_errors.c \
 threads.c
