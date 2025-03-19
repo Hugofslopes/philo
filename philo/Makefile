@@ -6,13 +6,13 @@
 #    By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 10:42:35 by hfilipe-          #+#    #+#              #
-#    Updated: 2025/03/19 15:04:00 by hfilipe-         ###   ########.fr        #
+#    Updated: 2025/03/19 21:23:35 by hfilipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 GDB = -ggdb
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra -g 
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = includes
@@ -22,6 +22,7 @@ SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 NAME = philo
 RM = rm -f
+SANITIZE_FLAGS = -fsanitize=address 
 
 $(shell mkdir -p $(OBJ_DIR))
 
@@ -40,3 +41,7 @@ fclean: clean
 	$(RM) $(NAME)
 	
 re: fclean all
+
+sanityze: FLAGS += $(SANITIZE_FLAGS)
+
+sanityze: fclean $(NAME)

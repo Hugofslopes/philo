@@ -1,7 +1,13 @@
 #include "../includes/philosophers.h"
 
-void	destroy(t_ph **ph)
+void	destroy(t_ph *ph)
 { 
-	while ((*ph)->trh_nbr)
-		pthread_mutex_destroy(&(*ph)->fork[(*ph)->trh_nbr--]);
+	long	i;
+
+	free(ph->fork);
+    free(ph->threads); 
+    free(ph->philo);
+	i = 0;
+	while (i < ph->nbr_ph)
+		pthread_mutex_destroy(&ph->fork[i++]);
 }

@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:43:54 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/19 16:16:53 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/03/19 20:12:27 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct	s_philophers
 	size_t			trh_nbr;
 	pthread_t		*threads;
 	pthread_mutex_t	*fork;
+	pthread_mutex_t	wait_to_start;
 	t_p				*philo;
 }	t_ph;
 
@@ -61,15 +62,15 @@ void		put_str_fd(char *str, int fd);
 long		a_to_l(char *str);
 //										Errors Functions
 void		atol_error();
-void		check_args(t_ph **ph, int i);
+void		check_args(t_ph *ph, int i);
 //										Init functions
-void		init_without_times_to_eat(char **av, t_ph **ph);
-void		init_with_times_to_eat(char **av,t_ph **ph);
+void		init_without_times_to_eat(char **av, t_ph *ph);
+void		init_with_times_to_eat(char **av,t_ph *ph);
 //										Time functions
-long long 	curr_tm();
+long	 	curr_tm();
 //										Thread functions
 void		*actions(void *philosopher);
-void		manage_threads(t_ph **ph);
+void		manage_threads(t_ph *ph);
 //										Clean and exit
-void		destroy(t_ph **ph);
+void		destroy(t_ph *ph);
 #endif
