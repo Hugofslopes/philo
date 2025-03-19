@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:43:54 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/17 15:24:40 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/03/19 16:16:53 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,48 @@ optional: <number_of_times_each_philosopher_must_eat>\n"
 # define ERROR_TM_TO_S "The time to sleep must be equal or great then 0\n"
 # define ERROR_TM_TO_E "The time to eat must be equal or great then 0\n"
 
+typedef struct s_philo t_p;
+
 typedef struct	s_philophers
 {
 	long			nbr_ph;
 	long			tm_to_d;
 	long			tm_to_s;
 	long			tm_to_e;
+	long			tm_to_tk;
 	long			nr_meals;
-	long			tm_of_day;
+	long			st_time;
+	long			elapsed_time;
+	int				is_dead;
 	size_t			trh_nbr;
 	pthread_t		*threads;
 	pthread_mutex_t	*fork;
+	t_p				*philo;
 }	t_ph;
 
-//Utilities functions
-size_t  str_len(char *str);
-void	put_str_fd(char *str, int fd);
-long	a_to_l(char *str);
+typedef struct	s_philo
+{
+	int				ph_id;
+	long			last_meal;
+	long			nr_meals;
+	t_ph			*ph;
+}	t_p;
 
-//Errors Functions
-void	atol_error();
-void	check_args(t_ph **ph, int i);
-
-//Init functions
-void	init_without_times_to_eat(char **av, t_ph **ph);
-void	init_with_times_to_eat(char **av,t_ph **ph);
-
-//Thread functions
-void	*thread_function(void *ph);
+//										Utilities functions
+size_t  	str_len(char *str);
+void		put_str_fd(char *str, int fd);
+long		a_to_l(char *str);
+//										Errors Functions
+void		atol_error();
+void		check_args(t_ph **ph, int i);
+//										Init functions
+void		init_without_times_to_eat(char **av, t_ph **ph);
+void		init_with_times_to_eat(char **av,t_ph **ph);
+//										Time functions
+long long 	curr_tm();
+//										Thread functions
+void		*actions(void *philosopher);
+void		manage_threads(t_ph **ph);
+//										Clean and exit
+void		destroy(t_ph **ph);
 #endif
