@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_args_errors.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/21 17:26:55 by hfilipe-          #+#    #+#             */
+/*   Updated: 2025/03/21 17:33:09 by hfilipe-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philosophers.h"
 
 void	check_args2(t_ph *ph, int i)
@@ -37,8 +49,8 @@ void	check_args(t_ph *ph, int i)
 	check_args2(ph, i);
 }
 
-void	atol_error()
+void	atol_error(void)
 {
-    put_str_fd("Numeric argument required\n", 2);
-    exit (1);
+	put_str_fd("Numeric argument required\n", 2);
+	exit (1);
 }
