@@ -5,9 +5,8 @@ void	destroy(t_ph *ph)
 	long	i;
 
 	free(ph->fork);
-    free(ph->threads); 
-    free(ph->philo);
+    free(ph->threads);
 	i = 0;
 	while (i < ph->nbr_ph)
-		pthread_mutex_destroy(&ph->fork[i++]);
+		mutex_destroy(&ph->fork[i++]);
 }

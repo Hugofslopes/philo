@@ -3,16 +3,15 @@
 void	init_philo(t_ph *ph)
 {
 	ph->trh_nbr = 0;
-	ph->fork = malloc(sizeof(pthread_mutex_t) * ph->nbr_ph);
+	ph->fork = malloc(sizeof(t_mutex) * ph->nbr_ph);
 	ph->threads = malloc(sizeof(pthread_t) * ph->nbr_ph);
 	ph->philo = malloc(sizeof(t_p) * ph->nbr_ph);
 	while (ph->trh_nbr < (size_t)ph->nbr_ph)
 	{
 		ph->philo[ph->trh_nbr].ph_id = ph->trh_nbr;
 		ph->philo[ph->trh_nbr].ph = ph;
-		//ph->philo[ph->trh_nbr].last_meal = ;
 		ph->philo[ph->trh_nbr].nr_meals = 0;
-		pthread_mutex_init(&ph->fork[ph->trh_nbr], NULL);
+		mutex_init(&ph->fork[ph->trh_nbr]);	
 		ph->trh_nbr++;
 	}
 }
@@ -20,8 +19,8 @@ void	init_philo(t_ph *ph)
 void	init_threads(t_ph *ph)
 {
 	ph->trh_nbr = 0;
-	pthread_mutex_init(&ph->wait_to_start, NULL);
-	pthread_mutex_lock(&ph->wait_to_start);
+	mutex_init(&ph->wait_to_start);
+	mutex_lock(&ph->wait_to_start);
 	while (ph->trh_nbr < (size_t)ph->nbr_ph)
 	{
 		if (pthread_create(&ph->threads[ph->trh_nbr], NULL, actions, \
@@ -33,7 +32,7 @@ void	init_threads(t_ph *ph)
 		(ph->trh_nbr)++;
 	}
 	ph->st_time = curr_tm();
-	pthread_mutex_unlock(&ph->wait_to_start);
+	mutex_unlock(&ph->wait_to_start);
 }
 
 long curr_tm()

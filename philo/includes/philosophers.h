@@ -30,6 +30,12 @@ optional: <number_of_times_each_philosopher_must_eat>\n"
 
 typedef struct s_philo t_p;
 
+typedef struct s_mutex
+{
+    pthread_mutex_t	mutex;
+    int				is_locked;
+} t_mutex;
+
 typedef struct	s_philophers
 {
 	long			nbr_ph;
@@ -43,8 +49,8 @@ typedef struct	s_philophers
 	int				is_dead;
 	size_t			trh_nbr;
 	pthread_t		*threads;
-	pthread_mutex_t	*fork;
-	pthread_mutex_t	wait_to_start;
+	t_mutex			*fork;
+	t_mutex			wait_to_start;
 	t_p				*philo;
 }	t_ph;
 
@@ -57,20 +63,26 @@ typedef struct	s_philo
 }	t_p;
 
 //										Utilities functions
-size_t  	str_len(char *str);
-void		put_str_fd(char *str, int fd);
-long		a_to_l(char *str);
+size_t	str_len(char *str);
+void	put_str_fd(char *str, int fd);
+long	a_to_l(char *str);
 //										Errors Functions
-void		atol_error();
-void		check_args(t_ph *ph, int i);
+void	atol_error();
+void	check_args(t_ph *ph, int i);
 //										Init functions
-void		init_without_times_to_eat(char **av, t_ph *ph);
-void		init_with_times_to_eat(char **av,t_ph *ph);
+void	init_without_times_to_eat(char **av, t_ph *ph);
+void	init_with_times_to_eat(char **av,t_ph *ph);
 //										Time functions
-long	 	curr_tm();
+long	curr_tm();
 //										Thread functions
-void		*actions(void *philosopher);
-void		manage_threads(t_ph *ph);
+void	*actions(void *philosopher);
+void	manage_threads(t_ph *ph);
 //										Clean and exit
-void		destroy(t_ph *ph);
+void	destroy(t_ph *ph);
+//										Mutex
+void    mutex_init(t_mutex *m);
+void    mutex_lock(t_mutex *m);
+void    mutex_unlock(t_mutex *m);
+int		mutex_locked(t_mutex *m);
+void    mutex_destroy(t_mutex *m);
 #endif

@@ -17,7 +17,7 @@ SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = includes
 SRC_FILES = philosophers.c philosophers_utils.c init.c check_args_errors.c \
-threads.c destroy.c
+threads.c destroy.c mutex.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 NAME = philo
