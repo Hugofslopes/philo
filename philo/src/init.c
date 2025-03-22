@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:26:37 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/21 20:28:23 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/03/22 14:16:38 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,62 @@ void	*monitoring(void *ph)
 	t_p		**phi;
 
 	philos = (t_ph *)ph;
-
 	while(!all_ready(&philos))
 		;
 	phi = &philos->philo;
-	while (!philos->is_dead)
+	if (philos->nr_meals)
 	{
-		i = 0;
-		phi = phi + i ;
-		while (i <  philos->nbr_ph - 1)
-		if (curr_tm() - (*phi)->last_meal > philos->tm_to_d)
+		while (!philos->is_dead && philos->nr_meals < (*phi)->nr_meals)
 		{
-			printf("%ld %d died\n", (curr_tm() - (*phi)->ph->st_time) \
-	/ 999, (*phi)->ph_id);
-		(*phi)->ph->is_dead = 1;
+			i = 0;
+			phi = phi + i ;
+			while (i <  philos->nbr_ph - 1 && !philos->is_dead && \
+				philos->nr_meals < (*phi)->nr_meals)
+			{
+				if (curr_tm() - (*phi)->last_meal > philos->tm_to_d)
+					phil_died(phi);
+				i++;
+			}
+		}
+	}
+	else
+	{
+		while (!philos->is_dead )
+		{
+			i = 0;
+			phi = phi + i ;
+			while (i <  philos->nbr_ph - 1 && !philos->is_dead)
+			{
+				if (curr_tm() - (*phi)->last_meal > philos->tm_to_d)
+					phil_died(phi);
+				i++;
+			}
 		}
 	}
 	return (NULL);
+}
+
+void	init_eat_time(t_ph *ph)
+{
+	long	i;
+	t_p		*philo;
+
+	i = 0;
+	while (i < ph->nbr_ph)
+	{
+		philo = ph->philo + i;
+		philo->last_meal =  curr_tm();
+		i++;
+	}
+	ph->st_time = curr_tm();
 }
 
 void	init_threads(t_ph *ph)
 {
 	ph->trh_nbr = 0;
 	mutex_init(&ph->wait_to_start);
+	mutex_init(&ph->ready_m);
+	mutex_init(&ph->first_meal);
 	mutex_lock(&ph->wait_to_start);
 	while (ph->trh_nbr < (size_t)ph->nbr_ph)
 	{
@@ -76,8 +109,8 @@ void	init_threads(t_ph *ph)
 		}
 		(ph->trh_nbr)++;
 	}
-	pthread_create(&ph->supervisor, NULL, monitoring, &ph);
-	ph->st_time = curr_tm();
+	init_eat_time(ph);
+	pthread_create(&ph->supervisor, NULL, monitoring, ph);
 	mutex_unlock(&ph->wait_to_start);
 }
 
@@ -97,8 +130,9 @@ void	init_without_times_to_eat(char **av, t_ph *ph)
 	ph->tm_to_e = a_to_l(av[4]);
 	ph->nr_meals = -1;
 	ph->is_dead = 0;
-	ph->ready = 1;
-	ph->tm_to_tk = ph->tm_to_d - ph->tm_to_s;
+	ph->ready = 0;
+	ph->odd_ate = 0;
+	ph->tm_to_tk = ph->tm_to_d - ph->tm_to_s - ph->tm_to_e;
 	check_args(ph, 0);
 	init_philo(ph);
 	init_threads(ph);
@@ -112,9 +146,10 @@ void	init_with_times_to_eat(char **av, t_ph *ph)
 	ph->tm_to_e = a_to_l(av[4]);
 	ph->nr_meals = a_to_l(av[5]);
 	ph->is_dead = 0;
-	ph->ready = 1;
-	ph->tm_to_tk = ph->tm_to_d - ph->tm_to_s;
-	check_args(ph, 0);
+	ph->ready = 0;
+	ph->odd_ate = 0;
+	ph->tm_to_tk = ph->tm_to_d - ph->tm_to_s - ph->tm_to_e;
+	check_args(ph, 1);
 	init_philo(ph);
 	init_threads(ph);
 }

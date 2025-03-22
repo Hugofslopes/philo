@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:43:54 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/21 20:25:08 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/03/22 14:25:07 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,14 @@ typedef struct s_philophers
 	long			elapsed_time;
 	int				is_dead;
 	int				ready;
+	int				odd_ate;
 	size_t			trh_nbr;
 	pthread_t		*threads;
 	pthread_t		supervisor;
 	t_mutex			*fork;
 	t_mutex			wait_to_start;
+	t_mutex			ready_m;
+	t_mutex			first_meal;
 	t_p				*philo;
 }	t_ph;
 
