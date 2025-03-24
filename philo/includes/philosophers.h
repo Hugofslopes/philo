@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:43:54 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/22 14:25:07 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/03/24 15:45:28 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,15 @@ typedef struct s_philo
 size_t	str_len(char *str);
 void	put_str_fd(char *str, int fd);
 long	a_to_l(char *str);
+int		a_tols(t_ph *ph, char **av);
+int		a_tols2(t_ph *ph, char **av);
+void	one_philo(t_ph **ph);
 //										Errors Functions
-void	atol_error(void);
-void	check_args(t_ph *ph, int i);
+int		atol_error(void);
+int		check_args(t_ph *ph, int i);
 //										Init functions
-void	init_without_times_to_eat(char **av, t_ph *ph);
-void	init_with_times_to_eat(char **av, t_ph *ph);
+int		init_without_times_to_eat(char **av, t_ph *ph);
+int		init_with_times_to_eat(char **av, t_ph *ph);
 //										Time functions
 long	curr_tm(void);
 //										Thread functions
@@ -86,6 +89,9 @@ void	phil_eat(t_p **philo, t_mutex **l_fk, t_mutex **r_fk);
 void	phil_died(t_p **philo);
 void	phil_think(t_p **philo);
 void	phil_sleep(t_p **philo);
+void	execute_odds(t_p **philo, t_mutex **l_fk, t_mutex **r_fk);
+void	wait_for_alltreads(t_p **phi);
+int		all_odd_ate(t_p **philo);
 //										Clean and exit
 void	destroy(t_ph *ph);
 //										Mutex
@@ -94,4 +100,6 @@ void	mutex_lock(t_mutex *m);
 void	mutex_unlock(t_mutex *m);
 int		mutex_locked(t_mutex *m);
 void	mutex_destroy(t_mutex *m);
+//										Monitoring
+void	*monitoring(void *ph);
 #endif

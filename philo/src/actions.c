@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:26:50 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/22 14:19:00 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:48:18 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	phil_eat(t_p **philo, t_mutex **l_fk, t_mutex **r_fk)
 	printf("%ld %d has taken a fork\n", (curr_tm() - (*philo)->ph->st_time) \
 	, (*philo)->ph_id);
 	(*philo)->last_meal = curr_tm();
-	printf("%ld %d is eating\n", (curr_tm() - (*philo)->ph->st_time) , (*philo)->ph_id);
+	printf("%ld %d is eating\n", (curr_tm() - (*philo)->ph->st_time), \
+	(*philo)->ph_id);
 	usleep((*philo)->ph->tm_to_e * 1000);
 	mutex_unlock(*r_fk);
 	mutex_unlock(*l_fk);

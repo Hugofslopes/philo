@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.c                                     :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/21 17:27:12 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/24 15:44:57 by hfilipe-         ###   ########.fr       */
+/*   Created: 2025/03/24 14:57:41 by hfilipe-          #+#    #+#             */
+/*   Updated: 2025/03/24 14:57:43 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-int	main(int ac, char**av)
+long	curr_tm(void)
 {
-	t_ph	ph;
+	struct timeval	tv;
 
-	if (ac == 5)
-	{
-		if (init_without_times_to_eat(av, &ph))
-			return (1);
-		manage_threads(&ph);
-		destroy(&ph);
-	}
-	else if (ac == 6)
-	{
-		if (init_with_times_to_eat(av, &ph))
-			return (1);
-		manage_threads(&ph);
-		destroy(&ph);
-	}
-	else
-		put_str_fd(ERROR_ARG, 2);
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }

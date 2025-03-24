@@ -6,7 +6,7 @@
 #    By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 10:42:35 by hfilipe-          #+#    #+#              #
-#    Updated: 2025/03/21 17:17:12 by hfilipe-         ###   ########.fr        #
+#    Updated: 2025/03/24 15:42:48 by hfilipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = includes
 SRC_FILES = philosophers.c philosophers_utils.c init.c check_args_errors.c \
-threads.c destroy.c mutex.c actions.c
+threads.c destroy.c mutex.c actions.c monitoring.c time.c threads2.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 NAME = philo
@@ -42,6 +42,6 @@ fclean: clean
 	
 re: fclean all
 
-sanityze: FLAGS += $(SANITIZE_FLAGS)
+sanitize: FLAGS += $(SANITIZE_FLAGS)
 
-sanityze: fclean $(NAME)
+sanitize: fclean $(NAME)
