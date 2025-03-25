@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:27:09 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/24 15:21:09 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:53:45 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ int	a_tols(t_ph *ph, char **av)
 	ph->tm_to_d = a_to_l(av[2]);
 	if (ph->tm_to_d == -1)
 		return (put_str_fd("Wrong input on time to die\n", 1), 1);
-	ph->tm_to_s = a_to_l(av[3]);
-	if (ph->tm_to_s == -1)
-		return (put_str_fd("Wrong input on time to sleep\n", 1), 1);
-	ph->tm_to_e = a_to_l(av[4]);
+	ph->tm_to_e = a_to_l(av[3]);
 	if (ph->tm_to_e == -1)
+		return (put_str_fd("Wrong input on time to sleep\n", 1), 1);
+	ph->tm_to_s = a_to_l(av[4]);
+	if (ph->tm_to_s == -1)
 		return (put_str_fd("Wrong input on time to eat\n", 1), 1);
 	return (0);
 }
@@ -73,12 +73,12 @@ int	a_tols2(t_ph *ph, char **av)
 		return (put_str_fd("Wrong input on number of philosophers\n", 1), 1);
 	ph->tm_to_d = a_to_l(av[2]);
 	if (ph->tm_to_d == -1)
-		return (put_str_fd("Wrong input on time to die\n", 1), 1);
-	ph->tm_to_s = a_to_l(av[3]);
-	if (ph->tm_to_s == -1)
-		return (put_str_fd("Wrong input on time to sleep\n", 1), 1);
-	ph->tm_to_e = a_to_l(av[4]);
+		return (put_str_fd("Wrong input on time tos die\n", 1), 1);
+	ph->tm_to_e = a_to_l(av[3]);
 	if (ph->tm_to_e == -1)
+		return (put_str_fd("Wrong input on time to sleep\n", 1), 1);
+	ph->tm_to_s = a_to_l(av[4]);
+	if (ph->tm_to_s == -1)
 		return (put_str_fd("Wrong input on time to eat\n", 1), 1);
 	ph->nr_meals = a_to_l(av[5]);
 	if (ph->nr_meals == -1)

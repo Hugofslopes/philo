@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:26:30 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/24 15:48:08 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:24:24 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,12 @@ void	loop_with_nr_meals(t_p **philo, t_mutex **l_fk, t_mutex **r_fk)
 	{
 		if (!mutex_locked(*r_fk) && !mutex_locked(*l_fk) && \
 		!(*philo)->ph->is_dead)
-			phil_eat(philo, l_fk, r_fk);
-		else if (!(*philo)->ph->is_dead)
 		{
-			phil_sleep(philo);
-			if (!mutex_locked(*r_fk) && !mutex_locked(*l_fk) && \
-			!(*philo)->ph->is_dead)
-				phil_eat(philo, l_fk, r_fk);
-			else
-				if ((*philo)->ph->tm_to_s > 0 && !(*philo)->ph->is_dead)
-					phil_think(philo);
+			phil_eat(philo, l_fk, r_fk);
+			if (!(*philo)->ph->is_dead)
+				phil_sleep(philo);
+			if (!(*philo)->ph->is_dead)
+				phil_think(philo);
 		}
 	}
 }
@@ -43,24 +39,8 @@ void	loop_without_meals(t_p **philo, t_mutex **r_fk, t_mutex **l_fk)
 			phil_eat(philo, l_fk, r_fk);
 			if (!(*philo)->ph->is_dead)
 				phil_sleep(philo);
-		}
-		else if (!(*philo)->ph->is_dead)
-		{
-			if ((*philo)->ph->tm_to_s > 0 && !(*philo)->ph->is_dead)
-				phil_think(philo);
 			if (!(*philo)->ph->is_dead)
-			{
-				if (!mutex_locked(*r_fk) && !mutex_locked(*l_fk) && \
-				!(*philo)->ph->is_dead)
-				{
-					phil_eat(philo, l_fk, r_fk);
-					if (!(*philo)->ph->is_dead)
-						phil_sleep(philo);
-				}
-			}
-			else
-				if (!(*philo)->ph->is_dead)
-					phil_sleep(philo);
+				phil_think(philo);
 		}
 	}
 }
@@ -81,8 +61,10 @@ void	*actions(void *philosopher)
 		l_fk = &philo->ph->fork[0];
 	else
 		l_fk = &philo->ph->fork[philo->ph_id + 1];
-	if (philo->ph_id % 2 == 0 || philo->ph_id == 0)
+	if (philo->ph_id % 2 == 1)
 		execute_odds(&philo, &l_fk, &r_fk);
+	else
+		execute_even(&philo);
 	while (!all_odd_ate(&philo))
 		;
 	if (philo->ph->nr_meals > 0)

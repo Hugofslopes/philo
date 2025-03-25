@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 09:41:58 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/24 15:15:47 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:31:46 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ void	monitoring2(t_ph *philos, t_p **phi)
 void	monitoring1(t_ph *philos, t_p **phi)
 {
 	long	i;
+	t_p		*phi2;
 
-	while (!philos->is_dead && philos->nr_meals < (*phi)->nr_meals)
+	phi2 = *phi + (philos->nbr_ph - 3);
+	while (!philos->is_dead && philos->nr_meals < phi2->nr_meals)
 	{
 		i = 0;
 		phi = phi + i ;
@@ -63,7 +65,7 @@ void	*monitoring(void *ph)
 	while (!all_ready(&philos))
 		;
 	phi = &philos->philo;
-	if (philos->nr_meals)
+	if (philos->nr_meals > 0)
 		monitoring1(philos, phi);
 	else
 		monitoring2(philos, phi);

@@ -6,11 +6,16 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 15:10:27 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/24 15:46:51 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:25:11 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
+
+void	execute_even(t_p **philo)
+{
+	phil_think(philo);
+}
 
 void	execute_odds(t_p **philo, t_mutex **l_fk, t_mutex **r_fk)
 {

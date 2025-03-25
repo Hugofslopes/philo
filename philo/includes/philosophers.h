@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:43:54 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/24 15:45:28 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:26:35 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	phil_died(t_p **philo);
 void	phil_think(t_p **philo);
 void	phil_sleep(t_p **philo);
 void	execute_odds(t_p **philo, t_mutex **l_fk, t_mutex **r_fk);
+void	execute_even(t_p **philo);
 void	wait_for_alltreads(t_p **phi);
 int		all_odd_ate(t_p **philo);
 //										Clean and exit
