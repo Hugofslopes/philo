@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:26:26 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/21 17:29:12 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:08:40 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	mutex_lock(t_mutex *m)
 
 void	mutex_unlock(t_mutex *m)
 {
-	m->is_locked = 0;
 	pthread_mutex_unlock(&m->mutex);
+	m->is_locked = 0;
 }
 
 int	mutex_locked(t_mutex *m)

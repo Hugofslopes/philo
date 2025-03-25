@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:43:54 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/25 16:26:35 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:19:51 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,29 +62,34 @@ typedef struct s_philophers
 typedef struct s_philo
 {
 	int				ph_id;
+	long			st_time;
+	long			t_to_e;
+	long			t_to_s;
+	long			t_to_d;
+	long			t_to_t;
 	long			last_meal;
 	long			nr_meals;
-	t_ph			*ph;
+	t_ph			*meal;
 }	t_p;
 
 //										Utilities functions
 size_t	str_len(char *str);
 void	put_str_fd(char *str, int fd);
 long	a_to_l(char *str);
-int		a_tols(t_ph *ph, char **av);
-int		a_tols2(t_ph *ph, char **av);
-void	one_philo(t_ph **ph);
+int		a_tols(t_ph **meal, char **av);
+int		a_tols2(t_ph **meal, char **av);
+void	one_philo(t_ph **meal);
 //										Errors Functions
 int		atol_error(void);
-int		check_args(t_ph *ph, int i);
+int		check_args(t_ph **meal, int i);
 //										Init functions
-int		init_without_times_to_eat(char **av, t_ph *ph);
-int		init_with_times_to_eat(char **av, t_ph *ph);
+int		init_without_times_to_eat(char **av, t_ph **meal);
+int		init_with_times_to_eat(char **av, t_ph **meal);
 //										Time functions
 long	curr_tm(void);
 //										Thread functions
 void	*actions(void *philosopher);
-void	manage_threads(t_ph *ph);
+void	manage_threads(t_ph **meal);
 void	phil_eat(t_p **philo, t_mutex **l_fk, t_mutex **r_fk);
 void	phil_died(t_p **philo);
 void	phil_think(t_p **philo);
@@ -94,7 +99,7 @@ void	execute_even(t_p **philo);
 void	wait_for_alltreads(t_p **phi);
 int		all_odd_ate(t_p **philo);
 //										Clean and exit
-void	destroy(t_ph *ph);
+void	destroy(t_ph **meal);
 //										Mutex
 void	mutex_init(t_mutex *m);
 void	mutex_lock(t_mutex *m);
@@ -102,5 +107,5 @@ void	mutex_unlock(t_mutex *m);
 int		mutex_locked(t_mutex *m);
 void	mutex_destroy(t_mutex *m);
 //										Monitoring
-void	*monitoring(void *ph);
+void	*monitoring(void *meal);
 #endif
