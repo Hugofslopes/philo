@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:27:12 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/25 22:16:09 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:00:52 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,22 @@
 
 int	main(int ac, char**av)
 {
-	t_ph	*meal;
+	t_meal	ph;
 
-	meal = malloc(sizeof(t_ph));
 	if (ac == 5)
 	{
-		if (init_without_times_to_eat(av, &meal))
+		if (init(av, &ph, 0))
 			return (1);
-		manage_threads(&meal);
-		destroy(&meal);
+		manage_threads(&ph);
+		destroy(&ph);
 	}
 	else if (ac == 6)
 	{
-		if (init_with_times_to_eat(av, &meal))
+		if (init(av, &ph, 1))
 			return (1);
-		manage_threads(&meal);
-		destroy(&meal);
+		manage_threads(&ph);
+		destroy(&ph);
 	}
 	else
-	{
-		free(meal);
 		put_str_fd(ERROR_ARG, 2);
-		return (1);
-	}
-	return (0);
 }

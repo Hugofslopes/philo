@@ -6,84 +6,63 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:26:30 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/25 22:14:40 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/14 15:24:33 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-void	loop_with_nr_meals(t_p **philo, t_mutex **l_fk, t_mutex **r_fk)
+int	meals_loop2(t_p **philo)
 {
-	while (!(*philo)->meal->is_dead && (*philo)->nr_meals \
-	< (*philo)->meal->nr_meals)
+	pthread_mutex_lock(&(*philo)->ph->finished);
+	if (!(*philo)->ph->m_finished)
 	{
-		if (!mutex_locked(*r_fk) && !mutex_locked(*l_fk) && \
-		!(*philo)->meal->is_dead)
+		pthread_mutex_unlock(&(*philo)->ph->finished);
+		phil_think(philo);
+	}
+	else
+		return (pthread_mutex_unlock(&(*philo)->ph->finished), 1);
+	return (0);
+}
+
+int	meals_loop(t_p **philo)
+{
+	pthread_mutex_lock(&(*philo)->ph->finished);
+	while (!(*philo)->ph->m_finished)
+	{
+		if (!mutex_locked((*philo)->r_fk) && !mutex_locked((*philo)->l_fk) && \
+		!(*philo)->ph->m_finished)
 		{
-			phil_eat(philo, l_fk, r_fk);
-			if (!(*philo)->meal->is_dead)
+			pthread_mutex_unlock(&(*philo)->ph->finished);
+			phil_eat(philo);
+			pthread_mutex_lock(&(*philo)->ph->finished);
+			if (!(*philo)->ph->m_finished)
+			{
+				pthread_mutex_unlock(&(*philo)->ph->finished);
 				phil_sleep(philo);
-			if (!(*philo)->meal->is_dead)
-				phil_think(philo);
+			}
+			else
+				return (pthread_mutex_unlock(&(*philo)->ph->finished));
+			if (meals_loop2(philo))
+				return (0);
+			pthread_mutex_lock(&(*philo)->ph->finished);
+			if ((*philo)->ph->m_finished)
+				return (pthread_mutex_unlock(&(*philo)->ph->finished));
 		}
 	}
+	return (pthread_mutex_unlock(&(*philo)->ph->finished));
 }
 
-void	loop_without_meals(t_p **philo, t_mutex **r_fk, t_mutex **l_fk)
-{
-	while (!(*philo)->meal->is_dead)
-	{
-		if (!mutex_locked(*r_fk) && !mutex_locked(*l_fk) && \
-		!(*philo)->meal->is_dead)
-		{
-			phil_eat(philo, l_fk, r_fk);
-			if (!(*philo)->meal->is_dead)
-				phil_sleep(philo);
-			if (!(*philo)->meal->is_dead)
-				phil_think(philo);
-		}
-	}
-}
-
-void	*actions(void *philosopher)
-{
-	t_p		*philo;
-	t_mutex	*l_fk;
-	t_mutex	*r_fk;
-
-	philo = (t_p *)philosopher;
-	while (mutex_locked(&philo->meal->ready_m))
-	;
-	mutex_lock(&philo->meal->ready_m);
-	philo->meal->ready += 1;
-	mutex_unlock(&philo->meal->ready_m);
-	wait_for_alltreads(&philo);
-	r_fk = &philo->meal->fork[philo->ph_id];
-	if (philo->ph_id == philo->meal->nbr_ph - 1)
-		l_fk = &philo->meal->fork[0];
-	else
-		l_fk = &philo->meal->fork[philo->ph_id + 1];
-	if (philo->ph_id % 2 == 1)
-		execute_odds(&philo, &l_fk, &r_fk);
-	else
-		execute_even(&philo);
-	while (!all_odd_ate(&philo))
-		;
-	if (philo->meal->nr_meals > 0)
-		loop_with_nr_meals(&philo, &r_fk, &l_fk);
-	else
-		loop_without_meals(&philo, &r_fk, &l_fk);
-	return (NULL);
-}
-
-void	manage_threads(t_ph **meal)
+void	manage_threads(t_meal *meal)
 {
 	long	i;
 
 	i = 0;
-	while (i < (*meal)->nbr_ph)
+	while (i < meal->nbr_ph)
 	{
-		pthread_join((*meal)->threads[i], NULL);
+		if (i == 0)
+			pthread_join(meal->supervisor, NULL);
+		pthread_join(meal->threads[i], NULL);
 		i++;
 	}
 }

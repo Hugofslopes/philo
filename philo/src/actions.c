@@ -6,49 +6,77 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:26:50 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/25 22:14:51 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:08:59 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-void	phil_eat(t_p **philo, t_mutex **l_fk, t_mutex **r_fk)
+void	phil_eat_f(t_p **philo)
 {
-	mutex_lock(*r_fk);
+	if ((*philo)->ph_id == (*philo)->nbr_philo - 1)
+	{
+		pthread_mutex_lock((*philo)->l_fk);
+		pthread_mutex_lock((*philo)->r_fk);
+	}
+	else
+	{
+		pthread_mutex_lock((*philo)->r_fk);
+		pthread_mutex_lock((*philo)->l_fk);
+	}
+}
+
+int	phil_eat(t_p **philo)
+{
+	phil_eat_f(philo);
+	pthread_mutex_lock(&(*philo)->ph->crr_tm);
 	printf("%ld %d has taken a fork\n", (curr_tm() - (*philo)->st_time) \
 	, (*philo)->ph_id + 1);
-	mutex_lock(&(*philo)->meal->first_meal);
-	(*philo)->meal->odd_ate++;
-	mutex_unlock(&(*philo)->meal->first_meal);
-	mutex_lock(*l_fk);
 	printf("%ld %d has taken a fork\n", (curr_tm() - (*philo)->st_time) \
 	, (*philo)->ph_id + 1);
 	(*philo)->last_meal = curr_tm();
 	printf("%ld %d is eating\n", (curr_tm() - (*philo)->st_time), \
 	(*philo)->ph_id + 1);
-	usleep((*philo)->t_to_e* 1000);
-	mutex_unlock(*r_fk);
-	mutex_unlock(*l_fk);
-	(*philo)->nr_meals++;
+	pthread_mutex_unlock(&(*philo)->ph->crr_tm);
+	pthread_mutex_lock(&(*philo)->ph->first_meal);
+	(*philo)->ph->odd_ate++;
+	pthread_mutex_unlock(&(*philo)->ph->first_meal);
+	usleep((*philo)->tm_to_e * 1000);
+	pthread_mutex_unlock((*philo)->l_fk);
+	pthread_mutex_unlock((*philo)->r_fk);
+	pthread_mutex_lock(&(*philo)->ph->meals_ate);
+	(*philo)->meals_ate++;
+	pthread_mutex_unlock(&(*philo)->ph->meals_ate);
+	return (0);
 }
 
-void	phil_sleep(t_p **philo)
+int	phil_sleep(t_p **philo)
 {
+	pthread_mutex_lock(&(*philo)->ph->crr_tm);
 	printf("%ld %d is sleeping\n", (curr_tm() - (*philo)->st_time) \
-	, (*philo)->ph_id + 1);
-	usleep((*philo)->t_to_s * 1000);
+, (*philo)->ph_id + 1);
+	pthread_mutex_unlock(&(*philo)->ph->crr_tm);
+	usleep((*philo)->tm_to_s * 1000);
+	return (0);
 }
 
-void	phil_think(t_p **philo)
+int	phil_think(t_p **philo)
 {
+	pthread_mutex_lock(&(*philo)->ph->crr_tm);
 	printf("%ld %d is thinking\n", (curr_tm() - (*philo)->st_time) \
-	, (*philo)->ph_id + 1);
-	usleep((*philo)->t_to_t * 1000);
+, (*philo)->ph_id + 1);
+	pthread_mutex_unlock(&(*philo)->ph->crr_tm);
+	usleep((*philo)->tm_to_tk * 1000);
+	return (0);
 }
 
-void	phil_died(t_p **philo)
+void	phil_died(t_p *philo)
 {
-	printf("%ld %d died\n", (curr_tm() - (*philo)->st_time) \
-	, (*philo)->ph_id + 1);
-	(*philo)->meal->is_dead = 1;
+	pthread_mutex_lock(&philo->ph->finished);
+	philo->ph->m_finished = 1;
+	pthread_mutex_unlock(&philo->ph->finished);
+	pthread_mutex_lock(&philo->ph->crr_tm);
+	printf("%ld %d died\n", (curr_tm() - philo->st_time) \
+	, philo->ph_id + 1);
+	pthread_mutex_unlock(&philo->ph->crr_tm);
 }

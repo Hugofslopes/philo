@@ -6,13 +6,13 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:26:55 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/24 12:00:14 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/03 11:23:56 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-int	check_args2(t_ph *ph, int i)
+int	check_args2(t_meal *ph, int i)
 {
 	if (i)
 	{
@@ -21,11 +21,16 @@ int	check_args2(t_ph *ph, int i)
 			put_str_fd(ERROR_MEALS, 2);
 			return (1);
 		}
+		else if (ph->nr_meals == 0)
+		{
+			put_str_fd(ERROR_ZERO_M, 2);
+			return (1);
+		}
 	}
 	return (0);
 }
 
-int	check_args(t_ph *ph, int i)
+int	check_args(t_meal *ph, int i)
 {
 	if (ph->nbr_ph <= 0)
 	{

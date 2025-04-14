@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 15:10:27 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/03/25 22:15:28 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:11:11 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 
 void	execute_even(t_p **philo)
 {
+	pthread_mutex_lock(&(*philo)->ph->first_meal);
+	(*philo)->ph->odd_ate++;
+	pthread_mutex_unlock(&(*philo)->ph->first_meal);
 	phil_think(philo);
 }
 
-void	execute_odds(t_p **philo, t_mutex **l_fk, t_mutex **r_fk)
+void	execute_odds(t_p **philo)
 {
-	phil_eat(philo, l_fk, r_fk);
-	if (!(*philo)->meal->is_dead)
+	phil_eat(philo);
+	pthread_mutex_lock(&(*philo)->ph->finished);
+	if (!(*philo)->ph->m_finished)
+	{
+		pthread_mutex_unlock(&(*philo)->ph->finished);
 		phil_sleep(philo);
-}
-
-void	wait_for_alltreads(t_p **phi)
-{
-	while (mutex_locked(&(*phi)->meal->wait_to_start))
-		;
+		return ;
+	}
+	pthread_mutex_unlock(&(*philo)->ph->finished);
 }
 
 int	count_odd_phil(int x)
@@ -48,14 +51,14 @@ int	count_odd_phil(int x)
 
 int	all_odd_ate(t_p **philo)
 {
-	if ((*philo)->meal->odd_ate >= count_odd_phil((*philo)->meal->nbr_ph))
+	if ((*philo)->ph->odd_ate >= count_odd_phil((*philo)->ph->nbr_ph))
 		return (1);
 	return (0);
 }
 
-void	one_philo(t_ph **meal)
+void	one_philo(t_meal **ph)
 {
 	printf("%d %d has taken a fork\n", 0, 0);
-	usleep((*meal)->tm_to_d * 1000);
-	printf("%ld %d died\n", (*meal)->tm_to_d, 0);
+	usleep((*ph)->tm_to_d * 1000);
+	printf("%ld %d died\n", (*ph)->tm_to_d, 0);
 }
