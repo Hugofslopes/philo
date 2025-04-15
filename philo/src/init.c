@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:26:37 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/14 16:03:19 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:24:57 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,7 @@ int	init(char **av, t_meal *meal, int i)
 	meal->all_ate = 0;
 	meal->ready_to_go = 0;
 	meal->odd_ph = count_odd_phil(meal->nbr_ph);
-	meal->tm_to_tk = (meal->tm_to_d - meal->tm_to_s - meal->tm_to_e) / 2;
-	if (meal->tm_to_tk < 0)
-		meal->tm_to_tk = 5;
+	meal->tm_to_tk = 5;
 	if (meal->nbr_ph == 1)
 		return (one_philo(&meal), 1);
 	if (check_args(meal, 0))

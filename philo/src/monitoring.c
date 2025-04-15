@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 09:41:58 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/14 16:26:33 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:31:28 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	check_all_ate(t_meal *meal, t_p *phi)
 	while (i <= meal->nbr_ph - 1)
 	{
 		pthread_mutex_lock(&meal->meals_ate);
-		if (phi[i].meals_ate == phi[i].nr_meals)
+		if (phi[i].meals_ate >= phi[i].nr_meals)
 			count++;
 		pthread_mutex_unlock(&meal->meals_ate);
 		i++;

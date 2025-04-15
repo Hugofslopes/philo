@@ -6,11 +6,11 @@
 #    By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 10:42:35 by hfilipe-          #+#    #+#              #
-#    Updated: 2025/04/11 17:10:36 by hfilipe-         ###   ########.fr        #
+#    Updated: 2025/04/15 16:21:37 by hfilipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
+CC = cc
 GDB = -ggdb
 FLAGS = -Wall -Werror -Wextra -g
 SRC_DIR = src
