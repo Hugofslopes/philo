@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:26:50 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/14 16:08:59 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/16 09:41:25 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	phil_eat_f(t_p **philo)
 	}
 }
 
-int	phil_eat(t_p **philo)
+void	phil_eat(t_p **philo)
 {
 	phil_eat_f(philo);
 	pthread_mutex_lock(&(*philo)->ph->crr_tm);
@@ -47,27 +47,24 @@ int	phil_eat(t_p **philo)
 	pthread_mutex_lock(&(*philo)->ph->meals_ate);
 	(*philo)->meals_ate++;
 	pthread_mutex_unlock(&(*philo)->ph->meals_ate);
-	return (0);
 }
 
-int	phil_sleep(t_p **philo)
+void	phil_sleep(t_p **philo)
 {
 	pthread_mutex_lock(&(*philo)->ph->crr_tm);
 	printf("%ld %d is sleeping\n", (curr_tm() - (*philo)->st_time) \
 , (*philo)->ph_id + 1);
 	pthread_mutex_unlock(&(*philo)->ph->crr_tm);
 	usleep((*philo)->tm_to_s * 1000);
-	return (0);
 }
 
-int	phil_think(t_p **philo)
+void	phil_think(t_p **philo)
 {
 	pthread_mutex_lock(&(*philo)->ph->crr_tm);
 	printf("%ld %d is thinking\n", (curr_tm() - (*philo)->st_time) \
 , (*philo)->ph_id + 1);
 	pthread_mutex_unlock(&(*philo)->ph->crr_tm);
 	usleep((*philo)->tm_to_tk * 1000);
-	return (0);
 }
 
 void	phil_died(t_p *philo)

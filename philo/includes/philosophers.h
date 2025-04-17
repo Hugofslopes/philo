@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:43:54 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/14 16:01:23 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/16 09:41:54 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ long	curr_tm(void);
 //										Thread functions
 void	*actions(void *philosopher);
 void	manage_threads(t_meal *ph);
-int		phil_eat(t_p **philo);
+void	phil_eat(t_p **philo);
 void	phil_died(t_p *philo);
-int		phil_think(t_p **philo);
-int		phil_sleep(t_p **philo);
+void	phil_think(t_p **philo);
+void	phil_sleep(t_p **philo);
 void	execute_odds(t_p **philo);
 void	execute_even(t_p **philo);
 int		all_odd_ate(t_p **philo);
