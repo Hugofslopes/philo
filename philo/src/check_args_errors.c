@@ -6,31 +6,28 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:26:55 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/03 11:23:56 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/21 13:41:37 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-int	check_args2(t_meal *ph, int i)
+int	check_args2(t_meal *ph)
 {
-	if (i)
+	if (ph->nr_meals < 0 && ph->nr_meals != -1)
 	{
-		if (ph->nr_meals < 0)
-		{
-			put_str_fd(ERROR_MEALS, 2);
-			return (1);
-		}
-		else if (ph->nr_meals == 0)
-		{
-			put_str_fd(ERROR_ZERO_M, 2);
-			return (1);
-		}
+		put_str_fd(ERROR_MEALS, 2);
+		return (1);
+	}
+	else if (ph->nr_meals == 0)
+	{
+		put_str_fd(ERROR_ZERO_M, 2);
+		return (1);
 	}
 	return (0);
 }
 
-int	check_args(t_meal *ph, int i)
+int	check_args(t_meal *ph)
 {
 	if (ph->nbr_ph <= 0)
 	{
@@ -52,7 +49,7 @@ int	check_args(t_meal *ph, int i)
 		put_str_fd(ERROR_TM_TO_E, 2);
 		return (1);
 	}
-	return (check_args2(ph, i));
+	return (check_args2(ph));
 }
 
 int	atol_error(void)

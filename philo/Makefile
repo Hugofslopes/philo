@@ -6,7 +6,7 @@
 #    By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 10:42:35 by hfilipe-          #+#    #+#              #
-#    Updated: 2025/04/15 16:21:37 by hfilipe-         ###   ########.fr        #
+#    Updated: 2025/04/21 13:51:51 by hfilipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 NAME = philo
 RM = rm -f
-SANITIZE_FLAGS = -fsanitize=thread -pie -fPIC
+SANITIZE_FLAGS = -fsanitize=thread
 
 all: $(NAME)
 

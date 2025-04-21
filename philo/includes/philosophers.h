@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:43:54 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/16 09:41:54 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/21 13:41:45 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,17 @@ meals.\n"
 
 typedef struct s_philo	t_p;
 
+typedef enum
+{
+    READY_M,
+    MEALS_ATE,
+    FRST_M,
+    FINISHED,
+    CRR_TM,
+    READY_TO_GOM,
+    NUM_MUTEXES
+} MutexEnum;
+
 typedef struct s_philophers
 {
 	long			nbr_ph;
@@ -44,20 +55,14 @@ typedef struct s_philophers
 	long			elapsed_time;
 	int				m_finished;
 	int				ready;
-	int				odd_ph;
-	int				odd_ate;
+	int				fm_ate;
 	int				ready_to_go;
 	int				all_ate;
 	size_t			trh_nbr;
 	pthread_t		*threads;
 	pthread_t		supervisor;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t	ready_m;
-	pthread_mutex_t	meals_ate;
-	pthread_mutex_t	first_meal;
-	pthread_mutex_t	finished;
-	pthread_mutex_t	crr_tm;
-	pthread_mutex_t	ready_to_gom;
+	pthread_mutex_t	mutex[NUM_MUTEXES];
 	t_p				*philo;
 }	t_meal;
 
@@ -87,7 +92,7 @@ void	one_philo(t_meal **ph);
 int		count_odd_phil(int x);
 //										Errors Functions
 int		atol_error(void);
-int		check_args(t_meal *ph, int i);
+int		check_args(t_meal *ph);
 //										Init functions
 int		init(char **av, t_meal *ph, int i);
 //										Time functions
@@ -101,7 +106,6 @@ void	phil_think(t_p **philo);
 void	phil_sleep(t_p **philo);
 void	execute_odds(t_p **philo);
 void	execute_even(t_p **philo);
-int		all_odd_ate(t_p **philo);
 //										Clean and exit
 void	destroy(t_meal *ph);
 //										Monitoring

@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:26:37 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/15 16:34:53 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/21 13:50:44 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	init_eat_time(t_meal *meal)
 	while (i < meal->nbr_ph)
 	{
 		philo = meal->philo + i;
-		pthread_mutex_lock(&meal->crr_tm);
+		pthread_mutex_lock(&meal->mutex[CRR_TM]);
 		philo->last_meal = curr_tm();
-		pthread_mutex_unlock(&meal->crr_tm);
+		pthread_mutex_unlock(&meal->mutex[CRR_TM]);
 		philo->st_time = philo->last_meal;
 		i++;
 	}
@@ -59,12 +59,9 @@ void	init_eat_time(t_meal *meal)
 int	init_threads(t_meal *meal)
 {
 	meal->trh_nbr = 0;
-	pthread_mutex_init(&meal->ready_m, NULL);
-	pthread_mutex_init(&meal->first_meal, NULL);
-	pthread_mutex_init(&meal->finished, NULL);
-	pthread_mutex_init(&meal->crr_tm, NULL);
-	pthread_mutex_init(&meal->ready_to_gom, NULL);
-	pthread_mutex_init(&meal->meals_ate, NULL);
+	while ((int)meal->trh_nbr < NUM_MUTEXES)
+		pthread_mutex_init(&meal->mutex[meal->trh_nbr++], NULL);
+	meal->trh_nbr = 0;
 	while (meal->trh_nbr < (size_t)meal->nbr_ph)
 	{
 		if (pthread_create(&(meal)->threads[meal->trh_nbr], NULL, actions, \
@@ -77,9 +74,9 @@ int	init_threads(t_meal *meal)
 	}
 	init_eat_time(meal);
 	pthread_create(&meal->supervisor, NULL, monitoring, meal);
-	pthread_mutex_lock(&meal->ready_to_gom);
+	pthread_mutex_lock(&meal->mutex[READY_TO_GOM]);
 	meal->ready_to_go++;
-	pthread_mutex_unlock(&meal->ready_to_gom);
+	pthread_mutex_unlock(&meal->mutex[READY_TO_GOM]);
 	return (0);
 }
 
@@ -91,15 +88,14 @@ int	init(char **av, t_meal *meal, int i)
 		meal->nr_meals = -1;
 	meal->m_finished = 0;
 	meal->ready = 0;
-	meal->odd_ate = 0;
+	meal->fm_ate = 0;
 	meal->all_ate = 0;
 	meal->ready_to_go = 0;
-	meal->odd_ph = count_odd_phil(meal->nbr_ph);
 	meal->tm_to_tk = 5;
+	if (check_args(meal))
+		return (1);
 	if (meal->nbr_ph == 1)
 		return (one_philo(&meal), 1);
-	if (check_args(meal, 0))
-		return (1);
 	init_philo(meal, 0);
 	if (init_threads(meal))
 		return (1);

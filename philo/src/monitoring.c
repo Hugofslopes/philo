@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 09:41:58 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/15 16:34:57 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/21 13:32:27 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ void	check_all_ate(t_meal *meal, t_p *phi)
 	count = 0;
 	while (i <= meal->nbr_ph - 1)
 	{
-		pthread_mutex_lock(&meal->meals_ate);
+		pthread_mutex_lock(&meal->mutex[MEALS_ATE]);
 		if (phi[i].meals_ate >= phi[i].nr_meals)
 			count++;
-		pthread_mutex_unlock(&meal->meals_ate);
+		pthread_mutex_unlock(&meal->mutex[MEALS_ATE]);
 		i++;
 	}
 	if (count == meal->nbr_ph)
 	{
-		pthread_mutex_lock(&meal->finished);
+		pthread_mutex_lock(&meal->mutex[FINISHED]);
 		meal->m_finished = 1;
-		pthread_mutex_unlock(&meal->finished);
+		pthread_mutex_unlock(&meal->mutex[FINISHED]);
 	}
 }
 
@@ -44,14 +44,14 @@ void	monitoring1(t_meal *meal, t_p *phi, int nr_m)
 	{
 		while (i < meal->nbr_ph - 1 && !meal->m_finished)
 		{
-			pthread_mutex_lock(&phi->ph->crr_tm);
-			if (curr_tm() - phi[i].last_meal - 5 > phi[i].tm_to_d)
+			pthread_mutex_lock(&phi->ph->mutex[CRR_TM]);
+			if (curr_tm() - phi[i].last_meal > phi[i].tm_to_d)
 			{
-				pthread_mutex_unlock(&phi->ph->crr_tm);
+				pthread_mutex_unlock(&phi->ph->mutex[CRR_TM]);
 				phil_died(&phi[i]);
 				break ;
 			}
-			pthread_mutex_unlock(&phi->ph->crr_tm);
+			pthread_mutex_unlock(&phi->ph->mutex[CRR_TM]);
 			if (nr_m)
 				check_all_ate(meal, phi);
 			i++;
@@ -68,13 +68,13 @@ void	*monitoring(void *meals)
 	meal = (t_meal *)meals;
 	while (1)
 	{
-		pthread_mutex_lock(&meal->ready_to_gom);
+		pthread_mutex_lock(&meal->mutex[READY_TO_GOM]);
 		if (meal->ready_to_go)
 		{
-			pthread_mutex_unlock(&meal->ready_to_gom);
+			pthread_mutex_unlock(&meal->mutex[READY_TO_GOM]);
 			break ;
 		}
-		pthread_mutex_unlock(&meal->ready_to_gom);
+		pthread_mutex_unlock(&meal->mutex[READY_TO_GOM]);
 		usleep(100);
 	}
 	phi = meal->philo;
