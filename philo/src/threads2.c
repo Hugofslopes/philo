@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 15:10:27 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/21 13:55:10 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/23 11:22:29 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	execute_even(t_p **philo)
 {
-	pthread_mutex_lock(&(*philo)->ph->mutex[MEALS_ATE]);
+	pthread_mutex_lock(&(*philo)->ph->mutex[FRST_M]);
 	(*philo)->ph->fm_ate++;
-	pthread_mutex_unlock(&(*philo)->ph->mutex[MEALS_ATE]);
+	pthread_mutex_unlock(&(*philo)->ph->mutex[FRST_M]);
 	phil_think(philo);
 }
 

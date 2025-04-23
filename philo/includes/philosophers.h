@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:43:54 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/21 13:41:45 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/23 11:04:35 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ meals.\n"
 
 typedef struct s_philo	t_p;
 
-typedef enum
+typedef enum MutexEnum
 {
-    READY_M,
-    MEALS_ATE,
-    FRST_M,
-    FINISHED,
-    CRR_TM,
-    READY_TO_GOM,
-    NUM_MUTEXES
-} MutexEnum;
+	READY_M,
+	MEALS_ATE,
+	FRST_M,
+	FINISHED,
+	CRR_TM,
+	READY_TO_GOM,
+	NUM_MUTEXES
+}	t_MutexEnum;
 
 typedef struct s_philophers
 {

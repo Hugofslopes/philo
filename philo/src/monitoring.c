@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 09:41:58 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/21 13:32:27 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/23 11:05:09 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	monitoring1(t_meal *meal, t_p *phi, int nr_m)
 	i = 0;
 	while (!meal->m_finished)
 	{
-		while (i < meal->nbr_ph - 1 && !meal->m_finished)
+		while (i < meal->nbr_ph && !meal->m_finished)
 		{
 			pthread_mutex_lock(&phi->ph->mutex[CRR_TM]);
-			if (curr_tm() - phi[i].last_meal > phi[i].tm_to_d)
+			if (curr_tm() - phi[i].last_meal >= phi[i].tm_to_d)
 			{
 				pthread_mutex_unlock(&phi->ph->mutex[CRR_TM]);
 				phil_died(&phi[i]);
@@ -56,6 +56,7 @@ void	monitoring1(t_meal *meal, t_p *phi, int nr_m)
 				check_all_ate(meal, phi);
 			i++;
 		}
+		usleep(1000);
 		i = 0;
 	}
 }

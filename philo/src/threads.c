@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:26:30 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/21 13:34:57 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/23 11:38:55 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 int	meals_loop2(t_p **philo)
 {
+	pthread_mutex_lock(&(*philo)->ph->mutex[FINISHED]);
+	if (!(*philo)->ph->m_finished)
+	{
+		pthread_mutex_unlock(&(*philo)->ph->mutex[FINISHED]);
+		phil_sleep(philo);
+	}
+	else
+		return (pthread_mutex_unlock(&(*philo)->ph->mutex[FINISHED]), 1);
 	pthread_mutex_lock(&(*philo)->ph->mutex[FINISHED]);
 	if (!(*philo)->ph->m_finished)
 	{
@@ -30,25 +38,22 @@ int	meals_loop(t_p **philo)
 	pthread_mutex_lock(&(*philo)->ph->mutex[FINISHED]);
 	while (!(*philo)->ph->m_finished)
 	{
-		if (!mutex_locked((*philo)->r_fk) && !mutex_locked((*philo)->l_fk) && \
-		!(*philo)->ph->m_finished)
+		pthread_mutex_unlock(&(*philo)->ph->mutex[FINISHED]);
+		if (!mutex_locked((*philo)->r_fk) && !mutex_locked((*philo)->l_fk))
 		{
-			pthread_mutex_unlock(&(*philo)->ph->mutex[FINISHED]);
-			phil_eat(philo);
 			pthread_mutex_lock(&(*philo)->ph->mutex[FINISHED]);
 			if (!(*philo)->ph->m_finished)
 			{
 				pthread_mutex_unlock(&(*philo)->ph->mutex[FINISHED]);
-				phil_sleep(philo);
+				phil_eat(philo);
 			}
 			else
 				return (pthread_mutex_unlock(&(*philo)->ph->mutex[FINISHED]));
 			if (meals_loop2(philo))
 				return (0);
-			pthread_mutex_lock(&(*philo)->ph->mutex[FINISHED]);
-			if ((*philo)->ph->m_finished)
-				return (pthread_mutex_unlock(&(*philo)->ph->mutex[FINISHED]));
 		}
+		usleep(100);
+		pthread_mutex_lock(&(*philo)->ph->mutex[FINISHED]);
 	}
 	return (pthread_mutex_unlock(&(*philo)->ph->mutex[FINISHED]));
 }

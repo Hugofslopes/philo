@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:19:43 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/21 13:52:14 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/23 11:04:57 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,20 @@ void	actions2(t_p *philo)
 		execute_odds(&philo);
 	else
 		execute_even(&philo);
-/* 	while (1)
+	if (philo->ph_id % 2 == 1)
 	{
-		pthread_mutex_lock(&philo->ph->mutex[FRST_M]);
-		if (philo->ph->fm_ate >= philo->ph->nbr_ph)
+		while (1)
 		{
+			pthread_mutex_lock(&philo->ph->mutex[FRST_M]);
+			if (philo->ph->fm_ate >= philo->ph->nbr_ph)
+			{
+				pthread_mutex_unlock(&philo->ph->mutex[FRST_M]);
+				break ;
+			}
 			pthread_mutex_unlock(&philo->ph->mutex[FRST_M]);
-			break ;
+			usleep(1000);
 		}
-		pthread_mutex_unlock(&philo->ph->mutex[FRST_M]);
-		usleep(1000);
-	} */
+	}
 	meals_loop(&philo);
 }
 
