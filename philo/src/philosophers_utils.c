@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:27:09 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/14 16:00:48 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/24 14:08:31 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ void	put_str_fd(char *str, int fd)
 long	a_to_l(char *str)
 {
 	int			sign;
-	long		result;
+	long long	result;
 
 	sign = 1;
 	result = 0;
+	if (str_len(str) > 23)
+		return (atol_error());
 	while (*str == 32 || (*str >= 9 && *str <= 13))
 		str++;
 	if (*str != '-' && *str != '+')
@@ -43,7 +45,11 @@ long	a_to_l(char *str)
 		if (*str++ == '-')
 			sign *= -1;
 	while (*str && *str >= '0' && *str <= '9')
+	{
 		result = (result * 10) + (*str++ - '0');
+		if (result > __LONG_MAX__)
+			return (atol_error());
+	}
 	if (*str && (*str < '0' || *str > '9'))
 		return (atol_error());
 	return (result * sign);
