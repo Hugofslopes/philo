@@ -6,11 +6,22 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 09:41:58 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/23 11:05:09 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:41:46 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
+
+void	phil_died(t_p *philo)
+{
+	pthread_mutex_lock(&philo->ph->mutex[FINISHED]);
+	philo->ph->m_finished = 1;
+	pthread_mutex_unlock(&philo->ph->mutex[FINISHED]);
+	pthread_mutex_lock(&philo->ph->mutex[CRR_TM]);
+	printf("%ld %d died\n", (curr_tm() - philo->st_time) \
+	, philo->ph_id + 1);
+	pthread_mutex_unlock(&philo->ph->mutex[CRR_TM]);
+}
 
 void	check_all_ate(t_meal *meal, t_p *phi)
 {
