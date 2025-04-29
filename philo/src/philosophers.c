@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: hfilipe- < hfilipe-@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:27:12 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/14 16:00:52 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:10:30 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,10 @@ int	main(int ac, char**av)
 		destroy(&ph);
 	}
 	else
+	{
 		put_str_fd(ERROR_ARG, 2);
+		put_str_fd(ERROR_ARG1, 2);
+		put_str_fd(ERROR_ARG2, 2);
+		put_str_fd(ERROR_ARG3, 2);
+	}
 }

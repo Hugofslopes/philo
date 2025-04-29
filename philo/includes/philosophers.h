@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: hfilipe- < hfilipe-@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 09:43:54 by hfilipe-          #+#    #+#             */
-/*   Updated: 2025/04/23 11:04:35 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:21:41 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-# define ERROR_ARG "Invalid number of arguments\n Please insert: \
-<number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> \
-optional: <number_of_times_each_philosopher_must_eat>\n"
-# define ERROR_NBR_PH "The program needs at least 1 philosopher to execute\n" 
-# define ERROR_MEALS "The number of meals must be equal or great then 0\n" 
-# define ERROR_TM_TO_D "The time to die must be equal or great then 0\n" 
-# define ERROR_TM_TO_S "The time to sleep must be equal or great then 0\n"
-# define ERROR_TM_TO_E "The time to eat must be equal or great then 0\n"
-# define ERROR_ZERO_M "All philosophers ate the required number of \
-meals.\n"
+# define ERROR_ARG "Invalid number of arguments.\nPlease insert: "
+# define ERROR_ARG1 "<number_of_philosophers> <time_to_die> <time_to_eat> "
+# define ERROR_ARG2 "<time_to_sleep> (optional): "
+# define ERROR_ARG3 "<number_of_times_each_philosopher_must_eat>\n"
+# define ERROR_NBR_PH "The program needs at least 1 philosopher to execute.\n" 
+# define ERROR_MEALS "The number of meals must be greater than or equal to 0.\n"
+# define ERROR_TM_TO_D "The time to die must be greater than or equal to 0.\n" 
+# define ERROR_TM_TO_S "The time to sleep must be greater than or equal to 0.\n"
+# define ERROR_TM_TO_E "The time to eat must be greater than or equal to 0.\n"
+# define ERROR_ZERO_M "All philosophers ate the required number of meals.\n"
 
 typedef struct s_philo	t_p;
 

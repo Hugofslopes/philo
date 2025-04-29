@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+         #
+#    By: hfilipe- < hfilipe-@student.42porto.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 10:42:35 by hfilipe-          #+#    #+#              #
-#    Updated: 2025/04/21 13:51:51 by hfilipe-         ###   ########.fr        #
+#    Updated: 2025/04/29 16:19:47 by hfilipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,17 @@ NAME = philo
 RM = rm -f
 SANITIZE_FLAGS = -fsanitize=thread
 
+DEPS = $(OBJ:.o=.d)
+
 all: $(NAME)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(FLAGS) -I $(INC_DIR) -c $< -o $@
+	$(CC) $(FLAGS) -I $(INC_DIR) -MMD -c $< -o $@
+
+-include $(DEPS)
 
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
@@ -44,5 +48,5 @@ fclean: clean
 
 re: fclean all
 
-sanitize: FLAGS += $(SANITIZE_FLAGS)
 sanitize: fclean all
+sanitize: FLAGS += $(SANITIZE_FLAGS)
