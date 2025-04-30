@@ -49,4 +49,12 @@
     <ol>
 		<li> Check if the number of parameters is correct. The program should have 4 or 5 parameters depending on whether the number of meals is included.</li>
 		<li> Implement the <b>atol( )</b>(string to long integer) function for each of the parameters, ensuring that the input consists only of numbers and that they are positive. This is important because there cannot be negative values for philosophers, meals, or time. We are using atol because we will be working with milliseconds, and the time values may exceed the range of a standard integer. This approach allows us to compare these values without needing to perform type casting.</li>
-		<li>For the case of one philosopher the simuation will start but has the philosopher will have only one fork he will die after the time to die as elapsed. FOr this we call <b>one_philo( )</b>.</li>
+	</ol>
+</html>
+
+### Simulation start
+<html>
+    <ol>
+		<li>In the case of a single philosopher, the simulation will start, but since the philosopher has only one fork, they will die once the time to die has elapsed. For this we call <b>one_philo( )</b>.</li>
+	</ol>
+</html>
