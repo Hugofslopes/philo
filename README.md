@@ -97,7 +97,7 @@
 
 <html>
 	</style>
-    <ol> list-style-type: none;
+    <ol>
 		<li><b>./philo 1 800 200 200</b> - The philosopher should die after 800 milliseconds.</li>
 		<li><b>./philo 5 800 200 200</b> - No philosopher should die (infinite loop).</li>
 		<li><b>./philo 5 800 200 200 7</b> - No philosopher should die, and the simulation stops after all philosophers have eaten at least 7 meals.</li>
