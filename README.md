@@ -79,7 +79,7 @@
     </p>
 </html>
 
-    cd philo 
+    cd philo ; make
 
 <html>
     <p>
