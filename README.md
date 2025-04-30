@@ -92,8 +92,9 @@
 <html>
     <p>
     <b>Step 4:</b> Run tests<br>
-	
+	</p>
 </html>
+
 	./philo 1 800 200 200
 	./philo 5 800 200 200
     ./philo 5 800 200 200 7
