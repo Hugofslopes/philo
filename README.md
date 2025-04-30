@@ -79,8 +79,6 @@
 		<li>To avoid issues with the forks, the first meal was 'forced': the odd-numbered philosophers took the forks and started eating, even philosophers started thinking while they were waiting for the forks.</li>
 		<li>After the first meal, we entered a loop where the philosophers eat, sleep, and think until one of the end conditions is reached. Always being careful with race conditions, using mutexes to prevent them..</li>
 	</ol>
-</details>
-<details>
 	<b>Monitoring</b><br>
     <ol>
 		<li>Wait for all threads to be created</li>
