@@ -87,14 +87,21 @@
     </p>
 </html>
 
-    ./philosophers <number of philosophers> <time to die> <time to eat> (optional): <number of meals>
+    ./philo <number of philosophers> <time to die> <time to eat> (optional): <number of meals>
 
 <html>
     <p>
     <b>Step 4:</b> Run tests<br>
-    To check if the outputs are correct and if the stack is sorted properly, use the script below. This tool is applicable for Linux and was built by 42 itself.
-    </p>
+	
 </html>
-
-    ARG="<numbers>"; ./push_swap $ARG | ./checker_linux $ARG
+	./philo 1 800 200 200
+	./philo 5 800 200 200
+    ./philo 5 800 200 200 7
+	./philo 4 410 200 200
+	./philo 4 310 200 100
+	./philo 4 400 200 200
+	./philo 5 400 200 200
+	./philo 2 410 200 200
+	./philo 2 400 200 200
+	./philo 5 800 200 200 10 | grep "is eating" | awk '{print $2}' | sort | uniq -c
 ## Improvements
