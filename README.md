@@ -79,7 +79,8 @@
     </p>
 </html>
 
-   cd philo;make
+   cd philo 
+   make
 
 <html>
     <p>
