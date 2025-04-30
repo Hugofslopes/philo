@@ -71,13 +71,15 @@
 		<li>Wait for all threads to be created, then continue when <b>philo->ph->ready == philo->ph->nbr_ph</b></li>
 		<li>Wait for monitoring to be created, then continue when <b>philo->ph->ready_to_go = 1</b> </li>
 		<li>To avoid issues with the forks, the first meal was 'forced': the odd-numbered philosophers took the forks and started eating, even philosophers started thinking while they were waiting for the forks.</li>
-		<li>After the first meal, we entered a loop where the philosophers eat, sleep, and think until one of the end conditions is reached. Always being carefull with the race conditions, using mutex to presevent it.</li>
+		<li>After the first meal, we entered a loop where the philosophers eat, sleep, and think until one of the end conditions is reached. Always being careful with race conditions, using mutexes to prevent them..</li>
 	</ol>
 
 #### Monitoring
 <html>
     <ol>
-		<li> </li>
+		<li>Wait for all threads to be created</li>
+		<li>Check if the time to die is greater than the current time minus the time of the last meal.</li>
+		<li>In the case where the number of philosophers is greater than 0, check if all the philosophers have eaten the minimum number of meals using the function <b>check_all_ate( )</b></li> 
 	</ol>
 
 ## Code Setup
