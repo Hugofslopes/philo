@@ -4,9 +4,9 @@
     </p>
     <h1 align="center">Philosophers</h1>
     <p align="center">
-        <img src="https://github.com/user-attachments/assets/4363c36a-9ff3-4e40-b9b5-ea31b6db625b" alt="Image" />
+        <img src="https://github.com/user-attachments/assets/4363c36a-9ff3-4e40-b9b5-ea31b6db625b" width="300" alt="Image" />
     </p>
-## Summary
+
 
 
 
