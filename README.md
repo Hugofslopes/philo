@@ -68,10 +68,11 @@
 #### Action
 <html>
     <ol>
-		<li> Wait for all threads to be created, then continue when <b>philo->ph->ready == philo->ph->nbr_ph</b></li>
-		<li>   </li>
-		<li> Wait for monitoring to be created, then continue when <b>philo->ph->ready_to_go = 1</b> </li>
-		<li> Wait for all threads being created </li>
+		<li>Wait for all threads to be created, then continue when <b>philo->ph->ready == philo->ph->nbr_ph</b></li>
+		<li>Wait for monitoring to be created, then continue when <b>philo->ph->ready_to_go = 1</b> </li>
+		<li>To avoid issues with the forks, the first meal was 'forced': the odd-numbered philosophers took the forks and started eating, even philosophers started thinking while they were waiting for the forks.</li>
+		<li>After the first meal, we entered a loop where the philosophers eat, sleep, and think until one of the end conditions is reached. Always being carefull with the race conditions, using mutex to presevent it.</li>
+
 	</ol>
 
 #### Monitoring
