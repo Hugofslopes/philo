@@ -88,6 +88,13 @@
 </details>
 </html>
 
+<html>
+<details>
+    <summary>Finish simulation</summary>
+    <ol>
+		<li>Call <b>manage_threads( )</b> to join all threads</li>
+		<li>Call <b>destroy( )</b> to free the allocated memory for the arrays and destroy all the mutexes."
+
 ## Code Setup
 <html>
     <p>    
