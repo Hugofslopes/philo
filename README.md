@@ -11,7 +11,7 @@
 ## Summary
 <html>
     <p>
-        <b>Philosophers</b> is a project from 42 School that aims to teach how to creat programs with threads.<br>
+        <b>Philosophers</b> is a project from 42 School that aims to teach how to creat programs with threads.<br><br>
 		<b>What was the problem that was presented?</b><br>
 		The project involves a table with X number of philosophers who will perform certain actions, and the goal is to keep them alive for as long as possible. Each philosopher will perform the actions of eating, sleeping, and thinking. The first two parameters (time to eat and time to sleep) are defined as arguments when calling the function, while the time to think will be defined by the project owner.<br>
 		To eat, each philosopher needs two forks. Each philosopher has only one fork, and they will need two to eat, so they need to take the other fork from another philosopher. After eating, if the philosopher is still alive, they should sleep for the duration specified in the arguments.<br>
