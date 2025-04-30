@@ -44,12 +44,15 @@
 </html>
 
 ## Code Phases
-### Parsing
+
 <html>
+<details>
+    <summary>Parsing</summary>
     <ol>
 		<li> Check if the number of parameters is correct. The program should have 4 or 5 parameters depending on whether the number of meals is included.</li>
 		<li> Implement the <b>atol( )</b>(string to long integer) function for each of the parameters, ensuring that the input consists only of numbers and that they are positive. This is important because there cannot be negative values for philosophers, meals, or time. We are using atol because we will be working with milliseconds, and the time values may exceed the range of a standard integer. This approach allows us to compare these values without needing to perform type casting.</li>
 	</ol>
+<details>
 </html>
 
 ### Simulation start
