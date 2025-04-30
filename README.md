@@ -95,23 +95,21 @@
 	</p>
 </html>
 
-	./philo 1 800 200 200 - The philosopher should die after 800 milliseconds.
+<html>
+    <ol>
+		<li>./philo 1 800 200 200 - The philosopher should die after 800 milliseconds.</li>
+		<li>./philo 5 800 200 200 - No philosopher should die (infinite loop).</li>
+		<li>./philo 5 800 200 200 7 - No philosopher should die, and the simulation stops after all philosophers have eaten at least 7 meals.</li>
+		<li>./philo 4 410 200 200 - No philosopher should die (infinite loop).</li>
+		<li>./philo 4 310 200 100 - One philosopher should die.</li>
+		<li>./philo 4 400 200 200 - One philosopher should die.</li>
+		<li>./philo 5 400 200 200 - One philosopher should die.</li>
+		<li>./philo 2 410 200 200 - No philosopher should die (infinite loop).</li>
+		<li>./philo 2 400 200 200 - One philosopher should die.</li>
+		<li>./philo 5 800 200 200 10 | grep "is eating" | awk '{print $2}' | sort | uniq -c - script to count the number of meals.</li>
 
-	./philo 5 800 200 200 - No philosopher should die (infinite loop).
-
-    ./philo 5 800 200 200 7 - No philosopher should die, and the simulation stops after all philosophers have eaten at least 7 meals.
-
-	./philo 4 410 200 200 - No philosopher should die (infinite loop).
-
-	./philo 4 310 200 100 - One philosopher should die.
-
-	./philo 4 400 200 200 - One philosopher should die.
-
-	./philo 5 400 200 200 - One philosopher should die.
-
-	./philo 2 410 200 200 - No philosopher should die (infinite loop).
-
-	./philo 2 400 200 200 - One philosopher should die.
-
-	./philo 5 800 200 200 10 | grep "is eating" | awk '{print $2}' | sort | uniq -c - script to count the number of meals. 
 ## Improvements
+<html>
+    <p>
+    Improve the parsing and error checking by consolidating everything into the same function. Enhance the meal initiation process by incorporating the monitoring within the same loop as the other threads
+	</p>
