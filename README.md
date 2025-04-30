@@ -35,8 +35,8 @@
 ## Parameters
 <html>
     <ol>
-        <li><b>Number of philosophers</b>The number of philosohers which will be on the simulation</li>
-		<li><b>Time to die</b>The number of philosohers which will be on the simulation</li>
-		<li><b>Time to eat</b>The number of philosohers which will be on the simulation</li>
-		<li><b>Time to sleep</b>The number of philosohers which will be on the simulation</li>
-		<li><b>Number of meals(</b>The number of philosohers which will be on the simulation</li>
+        <li><b>Number of philosophers - </b>The number of philosohers which will be on the simulation</li>
+		<li><b>Time to die - </b>The time (in milliseconds) that a philosopher has to live.Starts counting right after the last meal is eaten.</li>
+		<li><b>Time to eat - </b>The time (in milliseconds) it takes for a philosopher to eat.</li>
+		<li><b>Time to sleep - </b>The time (in milliseconds) that a philosopher sleeps.</li>
+		<li><b>Number of meals(optional) - </b>The number of meals each phisolosopher sould eat.</li>
