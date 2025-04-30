@@ -40,6 +40,7 @@
 		<li><b>Time to eat - </b>The time (in milliseconds) it takes for a philosopher to eat.</li>
 		<li><b>Time to sleep - </b>The time (in milliseconds) that a philosopher sleeps.</li>
 		<li><b>Number of meals(optional) - </b>The number of meals each phisolosopher sould eat.</li>
+	 </ol>
 </html>
 
 ## Code Phases
