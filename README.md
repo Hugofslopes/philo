@@ -64,6 +64,13 @@
 	</ol>
 </html>
 
+### Simulation 
+<html>
+    <ol>
+		<li> asd</li>
+	</ol>
+
+
 ## Code Setup
 <html>
     <p>    
@@ -96,7 +103,6 @@
 </html>
 
 <html>
-	</style>
     <ol>
 		<li><b>./philo 1 800 200 200</b> - The philosopher should die after 800 milliseconds.</li>
 		<li><b>./philo 5 800 200 200</b> - No philosopher should die (infinite loop).</li>
