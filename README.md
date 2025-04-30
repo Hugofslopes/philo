@@ -96,6 +96,11 @@
 </html>
 
 <html>
+	<style>
+        ol {
+            list-style-type: none;
+        }
+	</style>
     <ol>
 		<li><b>./philo 1 800 200 200</b> - The philosopher should die after 800 milliseconds.</li>
 		<li><b>./philo 5 800 200 200</b> - No philosopher should die (infinite loop).</li>
@@ -107,6 +112,7 @@
 		<li><b>./philo 2 410 200 200</b> - No philosopher should die (infinite loop).</li>
 		<li><b>./philo 2 400 200 200</b> - One philosopher should die.</li>
 		<li><b>./philo 5 800 200 200 10</b> | grep "is eating" | awk '{print $2}' | sort | uniq -c - script to count the number of meals.</li>
+	</ol>
 </html>
 
 ## Improvements
