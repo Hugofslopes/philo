@@ -80,7 +80,6 @@
 </html>
 
    cd philo 
-   make
 
 <html>
     <p>
