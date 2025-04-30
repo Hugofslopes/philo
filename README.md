@@ -58,7 +58,7 @@
 		<li>In the case of a single philosopher, the simulation will start, but since the philosopher has only one fork, they will die once the time to die has elapsed. For this we call <b>one_philo( )</b>.</li>
 		<li>In the case of multiple philosophers, we call <b>init_philo( )</b> to allocate memory for the arrays we use: the array of mutex forks, the array of other mutexes (defined by the enum), and the array for philosophers. After that, we initialize each philosopher, providing them with all the variables they will need to access during the simulation. To avoid <b>data races</b> (which occur when multiple threads access the same memory location concurrently), we assign each philosopher their own time to sleep, time to die, and other relevant variables. The only variable they will need to check from the main structure is whether the simulation has finished. In this loop, we will assign the forks that each philosopher will use. Each philosopher's right fork will be the one matching their ID number, while the left fork will be their ID plus one, except for the last philosopher, who will have the left fork as the first philosopher's fork. This arrangement is designed to prevent <b>deadlock</b> (a situation where two or more processes are unable to proceed because each is waiting for the other to release a resource).
 		</li>
-		<li><b>init_threads( )</b>We call this function to initialize each thread (which represents one philosopher), to initialize the mutex array, and to initialize the supervisor/monitoring thread (which will be responsible for checking if any philosopher has died and if the required number of meals has already been accomplished). The <b>pthread_mutex_init( )</b> function receives the address of a mutex, just as pthread_create( )</b> receives the address of the thread, the function to be executed, and the structure for each philosopher.
+		<li><b>init_threads( )</b> - We call this function to initialize each thread (which represents one philosopher), to initialize the mutex array, and to initialize the supervisor/monitoring thread (which will be responsible for checking if any philosopher has died and if the required number of meals has already been accomplished). The <b>pthread_mutex_init( )</b> function receives the address of a mutex, just as pthread_create( )</b> receives the address of the thread, the function to be executed, and the structure for each philosopher.
 		</li>
 		<li> After all threads are created we call <b>init_eat_time( )</b> to give each philosopher the starting simulation time.
 	</ol>
@@ -71,7 +71,7 @@
     </p>
 </html>
  
-    git clone https://github.com/Hugofslopes/push_swap  
+    git clone https://github.com/Hugofslopes/philosophers
 
 <html>
     <p>
@@ -86,8 +86,7 @@
     <b>Step 3:</b> Execute
     </p>
 </html>
-
-    ./push_swap <numbers>
+    ./philosophers <number of philosophers> <time to die> <time to eat> (optional):<time to sleep> (optional): <number of meals>
 
 <html>
     <p>
