@@ -6,13 +6,27 @@
     <p align="center">
         <img src="https://github.com/user-attachments/assets/4363c36a-9ff3-4e40-b9b5-ea31b6db625b" width="300" alt="Image" />
     </p>
+</html>
 
+## Summary
+<html>
+    <p>
+        <b>Philosophers<\b> is a project from 42 School that aims to teach how to creat programs with threads.
+		<b>What is the problem that was presented?</b><br>
+		The project involves a table with X number of philosophers who will perform certain actions, and the goal is to keep them alive for as long as possible. Each philosopher will perform the actions of eating, sleeping, and thinking. The first two parameters (time to eat and time to sleep) are defined as arguments when calling the function, while the time to think will be defined by the project owner.<br>
+		To eat, each philosopher needs two forks. Each philosopher has only one fork, and they will need two to eat, so they need to take the other fork from another philosopher. After eating, if the philosopher is still alive, they should sleep for the duration specified in the arguments.
+	</p>
+</html>
 
+## Thread
+<html>
+    <p>Thread is a sequence of instructions that can be executed independently by a computer's CPU. Threads are the smallest unit of processing that can be scheduled by an operating system. They allow for concurrent execution of code, which can improve the performance of applications, especially on multi-core processors.
+	</p>
+</html>
 
-
-
-
-
-
-
+## Mutex
+<html>
+    <p>A mutex, short for "mutual exclusion," is a synchronization primitive used in concurrent programming to manage access to shared resources. It is designed to prevent multiple threads from simultaneously accessing a resource, which can lead to race conditions and inconsistent data.<br>
+	In this project, each fork will be represented by a mutex. Additionally, other variables, such as meal->m_finished, also need to be protected by a mutex to prevent different threads from reading and writing to it simultaneously.
+	</p>
 </html>
