@@ -52,11 +52,12 @@
 		<li> Check if the number of parameters is correct. The program should have 4 or 5 parameters depending on whether the number of meals is included.</li>
 		<li> Implement the <b>atol( )</b>(string to long integer) function for each of the parameters, ensuring that the input consists only of numbers and that they are positive. This is important because there cannot be negative values for philosophers, meals, or time. We are using atol because we will be working with milliseconds, and the time values may exceed the range of a standard integer. This approach allows us to compare these values without needing to perform type casting.</li>
 	</ol>
-<details>
+</details>
 </html>
 
-### Simulation start
 <html>
+<details>
+    <summary>Prepare Simulation</summary>
     <ol>
 		<li>In the case of a single philosopher, the simulation will start, but since the philosopher has only one fork, they will die once the time to die has elapsed. For this we call <b>one_philo( )</b>.</li>
 		<li>In the case of multiple philosophers, we call <b>init_philo( )</b> to allocate memory for the arrays we use: the array of mutex forks, the array of other mutexes (defined by the enum), and the array for philosophers. After that, we initialize each philosopher, providing them with all the variables they will need to access during the simulation. To avoid <b>data races</b> (which occur when multiple threads access the same memory location concurrently), we assign each philosopher their own time to sleep, time to die, and other relevant variables. The only variable they will need to check from the main structure is whether the simulation has finished. In this loop, we will assign the forks that each philosopher will use. Each philosopher's right fork will be the one matching their ID number, while the left fork will be their ID plus one, except for the last philosopher, who will have the left fork as the first philosopher's fork. This arrangement is designed to prevent <b>deadlock</b> (a situation where two or more processes are unable to proceed because each is waiting for the other to release a resource).
@@ -65,25 +66,29 @@
 		</li>
 		<li> After all threads are created we call <b>init_eat_time( )</b> to give each philosopher the starting simulation time.
 	</ol>
+</details>
 </html>
 
-### Simulation 
-#### Action
 <html>
+<details>
+    <summary>Simulation</summary>
+	<b>Action</b><br>
     <ol>
 		<li>Wait for all threads to be created, then continue when <b>philo->ph->ready == philo->ph->nbr_ph</b></li>
 		<li>Wait for monitoring to be created, then continue when <b>philo->ph->ready_to_go = 1</b> </li>
 		<li>To avoid issues with the forks, the first meal was 'forced': the odd-numbered philosophers took the forks and started eating, even philosophers started thinking while they were waiting for the forks.</li>
 		<li>After the first meal, we entered a loop where the philosophers eat, sleep, and think until one of the end conditions is reached. Always being careful with race conditions, using mutexes to prevent them..</li>
 	</ol>
-
-#### Monitoring
-<html>
+</details>
+<details>
+	<b>Monitoring</b><br>
     <ol>
 		<li>Wait for all threads to be created</li>
 		<li>Check if the time to die is greater than the current time minus the time of the last meal.</li>
 		<li>In the case where the number of philosophers is greater than 0, check if all the philosophers have eaten the minimum number of meals using the function <b>check_all_ate( )</b></li> 
 	</ol>
+</details>
+</html>
 
 ## Code Setup
 <html>
