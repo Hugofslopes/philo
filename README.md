@@ -14,7 +14,8 @@
         <b>Philosophers</b> is a project from 42 School that aims to teach how to creat programs with threads.<br>
 		<b>What was the problem that was presented?</b><br>
 		The project involves a table with X number of philosophers who will perform certain actions, and the goal is to keep them alive for as long as possible. Each philosopher will perform the actions of eating, sleeping, and thinking. The first two parameters (time to eat and time to sleep) are defined as arguments when calling the function, while the time to think will be defined by the project owner.<br>
-		To eat, each philosopher needs two forks. Each philosopher has only one fork, and they will need two to eat, so they need to take the other fork from another philosopher. After eating, if the philosopher is still alive, they should sleep for the duration specified in the arguments.
+		To eat, each philosopher needs two forks. Each philosopher has only one fork, and they will need two to eat, so they need to take the other fork from another philosopher. After eating, if the philosopher is still alive, they should sleep for the duration specified in the arguments.<br>
+		The simulation ends when one philosopher dies, or if the optional parameter <number of meals> is provided, when all the philosophers have eaten the required number of meals.
 	</p>
 </html>
 
@@ -30,3 +31,12 @@
 	In this project, each fork will be represented by a mutex. Additionally, other variables, such as meal->m_finished (marks meal as finished), also need to be protected by a mutex to prevent different threads from reading and writing to it simultaneously.
 	</p>
 </html>
+
+## Parameters
+<html>
+    <ol>
+        <li><b>Number of philosophers</b>The number of philosohers which will be on the simulation</li>
+		<li><b>Time to die</b>The number of philosohers which will be on the simulation</li>
+		<li><b>Time to eat</b>The number of philosohers which will be on the simulation</li>
+		<li><b>Time to sleep</b>The number of philosohers which will be on the simulation</li>
+		<li><b>Number of meals(</b>The number of philosohers which will be on the simulation</li>
