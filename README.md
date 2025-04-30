@@ -40,3 +40,11 @@
 		<li><b>Time to eat - </b>The time (in milliseconds) it takes for a philosopher to eat.</li>
 		<li><b>Time to sleep - </b>The time (in milliseconds) that a philosopher sleeps.</li>
 		<li><b>Number of meals(optional) - </b>The number of meals each phisolosopher sould eat.</li>
+
+## Code Phases
+### Parsing
+<html>
+    <ol>
+		<li> Check if the number of parameters is correct. The program should have 4 or 5 parameters depending on whether the number of meals is included.</li>
+		<li> Implement the <b>atol( )</b>(string to long integer) function for each of the parameters, ensuring that the input consists only of numbers and that they are positive. This is important because there cannot be negative values for philosophers, meals, or time. We are using atol because we will be working with milliseconds, and the time values may exceed the range of a standard integer. This approach allows us to compare these values without needing to perform type casting.</li>
+		<li>For the case of one philosopher the simuation will start but has the philosopher will have only one fork he will die after the time to die as elapsed. FOr this we call <b>one_philo( )</b>.</li>
