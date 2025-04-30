@@ -87,7 +87,7 @@
     </p>
 </html>
 
-    ./philosophers <number of philosophers> <time to die> <time to eat> (optional):<time to sleep> (optional): <number of meals>
+    ./philosophers <number of philosophers> <time to die> <time to eat> (optional): <number of meals>
 
 <html>
     <p>
