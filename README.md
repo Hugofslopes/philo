@@ -79,7 +79,7 @@
     </p>
 </html>
 
-    make
+   cd /philol; make
 
 <html>
     <p>
@@ -112,6 +112,6 @@
 	./philo 2 410 200 200
 
 	./philo 2 400 200 200
-	
+
 	./philo 5 800 200 200 10 | grep "is eating" | awk '{print $2}' | sort | uniq -c
 ## Improvements
