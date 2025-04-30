@@ -56,5 +56,42 @@
 <html>
     <ol>
 		<li>In the case of a single philosopher, the simulation will start, but since the philosopher has only one fork, they will die once the time to die has elapsed. For this we call <b>one_philo( )</b>.</li>
+		<li>In the case of multiple philosophers, we call <b>init_philo( )</b> to allocate memory for the arrays we use: the array of mutex forks, the array of other mutexes (defined by the enum), and the array for philosophers. After that, we initialize each philosopher, providing them with all the variables they will need to access during the simulation. To avoid <b>data races</b> (which occur when multiple threads access the same memory location concurrently), we assign each philosopher their own time to sleep, time to die, and other relevant variables. The only variable they will need to check from the main structure is whether the simulation has finished. In this loop, we will assign the forks that each philosopher will use. Each philosopher's right fork will be the one matching their ID number, while the left fork will be their ID plus one, except for the last philosopher, who will have the left fork as the first philosopher's fork. This arrangement is designed to prevent <b>deadlock</b> (a situation where two or more processes are unable to proceed because each is waiting for the other to release a resource).
+		</li>
 	</ol>
 </html>
+
+## Code Setup
+<html>
+    <p>    
+    <b>Step 1:</b> Clone the repository
+    </p>
+</html>
+ 
+    git clone https://github.com/Hugofslopes/push_swap  
+
+<html>
+    <p>
+    <b>Step 2:</b> Open the terminal on the repo folder and write
+    </p>
+</html>
+
+    make
+
+<html>
+    <p>
+    <b>Step 3:</b> Execute
+    </p>
+</html>
+
+    ./push_swap <numbers>
+
+<html>
+    <p>
+    <b>Step 4:</b> Run tests<br>
+    To check if the outputs are correct and if the stack is sorted properly, use the script below. This tool is applicable for Linux and was built by 42 itself.
+    </p>
+</html>
+
+    ARG="<numbers>"; ./push_swap $ARG | ./checker_linux $ARG
+## Improvements
