@@ -68,7 +68,10 @@
 #### Action
 <html>
     <ol>
-		<li> </li>
+		<li> Wait for all threads to be created, then continue when <b>philo->ph->ready == philo->ph->nbr_ph</b></li>
+		<li>   </li>
+		<li> Wait for monitoring to be created, then continue when <b>philo->ph->ready_to_go = 1</b> </li>
+		<li> Wait for all threads being created </li>
 	</ol>
 
 #### Monitoring
