@@ -79,7 +79,7 @@
     </p>
 </html>
 
-   cd /philol;make
+   cd philo;make
 
 <html>
     <p>
